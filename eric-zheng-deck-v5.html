@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eric Zheng — Portfolio Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+
+:root{
+--canvas:#090909;
+--panel-hero:#090909;
+--panel-editorial:#101010;
+--panel-ai:#141414;
+--panel-film:#1a1a1a;
+--panel-closing:#121212;
+--surface:#171717;
+--surface-strong:#1d1d1d;
+--surface-border:#342b20;
+--ink:#f1ece3;
+--body:#c8bfb2;
+--muted:#958b7e;
+--accent:#c5a065;
+--accent-soft:rgba(197,160,101,0.18);
+--accent-line:rgba(197,160,101,0.38);
+--hairline:rgba(241,236,227,0.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{
+background:var(--canvas);
+color:var(--ink);
+font-family:'Barlow Condensed',sans-serif;
+overflow:hidden;
+height:100vh;
+width:100vw;
+}
+
+body{
+text-wrap:pretty;
+letter-spacing:0.01em;
+}
+
+.deck{width:100%;height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(circle at top,rgba(197,160,101,0.08),transparent 34%),var(--canvas);}
+.slides-wrap{display:flex;flex:1;transition:transform 0.8s cubic-bezier(0.76,0,0.24,1);}
+.slide{
+min-width:100vw;
+height:100%;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:stretch;
+background:
+linear-gradient(180deg,rgba(255,255,255,0.024),transparent 24%),
+var(--panel-editorial);
+}
+.slide-hero{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent 24%),var(--panel-hero);}
+.slide-ai{background:linear-gradient(180deg,rgba(255,255,255,0.025),transparent 22%),var(--panel-ai);}
+.slide-film{background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent 20%),var(--panel-film);}
+.slide-closing{background:linear-gradient(180deg,rgba(255,255,255,0.022),transparent 24%),var(--panel-closing);}
+.slide::before{
+content:'';
+position:absolute;
+inset:0;
+background:radial-gradient(ellipse at center,transparent 34%,rgba(0,0,0,0.5) 100%);
+pointer-events:none;
+}
+.slide-inner{
+width:100%;
+max-width:1280px;
+margin:0 auto;
+padding:clamp(56px,6.5vh,90px) clamp(44px,5vw,96px);
+display:flex;
+flex-direction:column;
+justify-content:center;
+position:relative;
+z-index:1;
+opacity:0;
+transform:translateY(14px) scale(0.985);
+transition:opacity 0.65s 0.08s cubic-bezier(0.22,1,0.36,1), transform 0.65s 0.08s cubic-bezier(0.22,1,0.36,1);
+}
+.slide.active .slide-inner{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+
+.bg-grain{
+position:absolute;
+inset:0;
+opacity:0.08;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:256px;
+pointer-events:none;
+mix-blend-mode:soft-light;
+}
+.bg-line{
+position:absolute;
+left:clamp(20px,3vw,60px);
+top:0;
+width:0.5px;
+height:100%;
+background:linear-gradient(to bottom,transparent,var(--accent-line),transparent);
+pointer-events:none;
+}
+
+.slide-index,
+.slide-cat,
+.s1-eyebrow,
+.s1-title,
+.s1-meta-item,
+.col-head,
+.card-cat,
+.stat-l,
+.vlabel,
+.caption,
+.availability,
+.contact-list li span:first-child,
+.nbtn,
+.progress{
+font-family:'Barlow Condensed',sans-serif;
+font-weight:500;
+text-transform:uppercase;
+}
+
+.slide-index{
+font-size:12px;
+letter-spacing:0.28em;
+color:var(--muted);
+position:absolute;
+top:clamp(22px,2.8vh,34px);
+left:0;
+}
+.slide-cat{
+font-size:12px;
+letter-spacing:0.26em;
+color:var(--accent);
+position:absolute;
+top:clamp(22px,2.8vh,34px);
+right:0;
+}
+
+.s1-eyebrow{
+font-size:12px;
+letter-spacing:0.3em;
+color:var(--muted);
+margin-bottom:clamp(24px,3vh,36px);
+}
+.s1-name-text{
+font-family:'Barlow Condensed',sans-serif;
+font-weight:500;
+font-size:14px;
+letter-spacing:0.35em;
+text-transform:uppercase;
+color:var(--accent);
+margin-bottom:clamp(12px,1.5vh,18px);
+}
+.s1-name{
+font-family:'Space Grotesk',sans-serif;
+font-size:clamp(70px,7.7vw,110px);
+font-weight:400;
+line-height:0.93;
+color:var(--ink);
+letter-spacing:-0.02em;
+max-width:780px;
+text-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+.s1-name em,
+.h2 em,
+.quote-text em{
+font-style:italic;
+color:var(--accent);
+}
+.s1-title{
+font-size:12px;
+letter-spacing:0.2em;
+color:var(--muted);
+margin:clamp(22px,2.8vh,34px) 0 clamp(34px,4.5vh,56px);
+line-height:1.9;
+}
+.s1-tagline{
+font-family:'Space Grotesk',sans-serif;
+font-style:italic;
+font-size:clamp(28px,2.5vw,36px);
+color:#dfd7ca;
+line-height:1.45;
+max-width:620px;
+padding-left:26px;
+border-left:1px solid var(--accent-line);
+}
+.s1-meta{
+display:flex;
+gap:clamp(30px,4vw,58px);
+margin-top:clamp(46px,5.2vh,68px);
+flex-wrap:wrap;
+}
+.s1-meta-item{
+font-size:12px;
+letter-spacing:0.18em;
+color:var(--muted);
+text-transform:uppercase;
+}
+.s1-meta-item span{
+display:block;
+color:var(--ink);
+margin-top:8px;
+letter-spacing:0.01em;
+font-size:16px;
+font-family:'Barlow Condensed',sans-serif;
+font-weight:500;
+text-transform:none;
+}
+
+.h2{
+font-family:'Space Grotesk',sans-serif;
+font-size:clamp(54px,5.7vw,80px);
+font-weight:400;
+line-height:0.96;
+color:var(--ink);
+letter-spacing:-0.018em;
+max-width:820px;
+}
+.rule{
+width:64px;
+height:1px;
+background:var(--accent);
+margin:clamp(22px,2.8vh,32px) 0;
+box-shadow:0 0 24px rgba(197,160,101,0.24);
+}
+.body-text{
+font-size:20px;
+line-height:1.72;
+color:var(--body);
+max-width:760px;
+letter-spacing:0.01em;
+}
+.body-text span{
+color:var(--ink);
+}
+.mt-xs{margin-top:22px;}
+.mt-s{margin-top:clamp(22px,2.8vh,32px);}
+.caption{
+font-size:12px;
+color:var(--muted);
+margin-top:14px;
+letter-spacing:0.2em;
+}
+
+.two-col{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:clamp(40px,5.5vw,92px);
+margin-top:clamp(28px,3.4vh,42px);
+}
+.col-head{
+font-size:12px;
+letter-spacing:0.28em;
+color:var(--muted);
+margin-bottom:20px;
+padding-bottom:13px;
+border-bottom:0.5px solid var(--hairline);
+}
+.list{list-style:none;}
+.list li{
+font-size:18px;
+color:var(--body);
+line-height:1.58;
+padding:clamp(10px,1.15vh,14px) 0;
+border-bottom:0.5px solid rgba(241,236,227,0.07);
+letter-spacing:0.01em;
+padding-left:20px;
+position:relative;
+}
+.list li::before{
+content:'·';
+position:absolute;
+left:0;
+color:var(--accent);
+font-size:20px;
+line-height:1.12;
+}
+.list li strong{
+color:var(--ink);
+font-weight:500;
+}
+
+.card-grid-2,
+.card-grid-3,
+.card-grid-4,
+.stat-grid,
+.vgrid{
+display:grid;
+gap:18px;
+margin-top:clamp(22px,2.6vh,32px);
+}
+.card-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.card-grid-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.card-grid-4{grid-template-columns:repeat(4,minmax(0,1fr));}
+.stat-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+.vgrid{grid-template-columns:repeat(2,minmax(0,1fr));}
+
+.card,
+.stat-card,
+.vbox,
+.brand,
+.badge{
+background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.012));
+border:0.5px solid var(--surface-border);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.03),0 20px 40px rgba(0,0,0,0.18);
+backdrop-filter:blur(10px);
+}
+
+.card,
+.stat-card{
+border-radius:6px;
+padding:clamp(22px,2.4vh,28px) clamp(22px,2vw,28px);
+}
+.card-cat{
+font-size:11px;
+letter-spacing:0.24em;
+color:var(--accent);
+margin-bottom:12px;
+text-transform:uppercase;
+}
+.card-name{
+font-size:20px;
+color:var(--ink);
+font-weight:500;
+margin-bottom:10px;
+line-height:1.2;
+font-family:'Barlow Condensed',sans-serif;
+}
+.card-body{
+font-size:16px;
+color:var(--body);
+line-height:1.6;
+letter-spacing:0.01em;
+}
+
+.stat-n{
+font-family:'Space Grotesk',sans-serif;
+font-size:clamp(44px,3.9vw,66px);
+font-weight:400;
+line-height:0.92;
+color:var(--ink);
+}
+.stat-l{
+font-size:11px;
+letter-spacing:0.18em;
+color:var(--muted);
+margin-top:10px;
+}
+
+.badge-row,
+.brand-row{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:clamp(18px,2.2vh,26px);
+}
+.badge,
+.brand{
+border-radius:999px;
+padding:8px 15px;
+font-size:11px;
+letter-spacing:0.18em;
+text-transform:uppercase;
+}
+.badge{
+color:var(--accent);
+}
+.brand{
+color:#ddcfb3;
+}
+
+.vbox{
+border-radius:6px;
+aspect-ratio:16/9;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:14px;
+position:relative;
+overflow:hidden;
+}
+.vbox::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(135deg,rgba(197,160,101,0.18),transparent 42%,rgba(255,255,255,0.02));
+pointer-events:none;
+}
+.vplay{
+width:46px;
+height:46px;
+border:1px solid rgba(197,160,101,0.42);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(0,0,0,0.24);
+position:relative;
+z-index:1;
+}
+.vplay::after{
+content:'▶';
+font-size:11px;
+color:rgba(236,230,220,0.76);
+margin-left:3px;
+}
+.vlabel{
+font-size:11px;
+letter-spacing:0.16em;
+color:#ddcfb3;
+position:relative;
+z-index:1;
+}
+
+.quote-block{
+border-left:1px solid var(--accent-line);
+padding:clamp(18px,2.2vh,24px) 0 clamp(18px,2.2vh,24px) 30px;
+margin-top:clamp(28px,3.4vh,40px);
+max-width:760px;
+}
+.quote-text{
+font-family:'Space Grotesk',sans-serif;
+font-style:italic;
+font-size:clamp(32px,2.9vw,42px);
+color:#dcd4c7;
+line-height:1.38;
+font-weight:400;
+}
+.quote-text em{font-style:normal;}
+
+.contact-list{
+list-style:none;
+margin-top:clamp(28px,3.2vh,36px);
+max-width:760px;
+}
+.contact-list li{
+font-size:18px;
+color:var(--body);
+padding:clamp(14px,1.6vh,18px) 0;
+border-bottom:0.5px solid var(--hairline);
+letter-spacing:0.02em;
+display:grid;
+grid-template-columns:minmax(120px,150px) 1fr;
+gap:30px;
+align-items:baseline;
+}
+.contact-list li span:first-child{
+color:var(--accent);
+font-size:11px;
+letter-spacing:0.22em;
+}
+.availability{
+margin-top:clamp(32px,3.8vh,48px);
+font-size:12px;
+letter-spacing:0.22em;
+color:var(--muted);
+}
+
+.card, .stat-card, .vbox{
+transition:transform 0.35s cubic-bezier(0.22,1,0.36,1), border-color 0.35s, box-shadow 0.35s;
+}
+.card:hover, .stat-card:hover, .vbox:hover{
+transform:translateY(-4px);
+border-color:rgba(197,160,101,0.38);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.04), 0 28px 56px rgba(0,0,0,0.32);
+}
+
+.badge, .brand{
+transition:all 0.25s cubic-bezier(0.22,1,0.36,1);
+cursor:default;
+}
+.badge:hover{
+background:linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.025));
+border-color:rgba(197,160,101,0.45);
+color:#d4b47a;
+}
+.brand:hover{
+background:linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.025));
+border-color:rgba(221,207,179,0.35);
+color:#f0e6d3;
+}
+
+.dot:hover:not(.on){
+background:rgba(241,236,227,0.45);
+transform:scale(1.5);
+}
+
+.list li{
+transition:color 0.2s, padding-left 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.list li:hover{
+color:var(--ink);
+padding-left:24px;
+}
+.list li:hover::before{
+color:#d4b47a;
+}
+
+.contact-list li{
+transition:background 0.2s;
+}
+.contact-list li:hover{
+background:rgba(255,255,255,0.03);
+}
+
+.vplay{
+transition:all 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.vbox:hover .vplay{
+background:rgba(197,160,101,0.18);
+border-color:rgba(197,160,101,0.65);
+transform:scale(1.08);
+}
+
+.video-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:16px;
+margin-top:clamp(22px,2.6vh,32px);
+}
+.video-item{}
+.video-wrap{
+position:relative;
+padding-top:56.25%;
+border-radius:6px;
+overflow:hidden;
+border:0.5px solid var(--surface-border);
+}
+.video-wrap iframe{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+border:none;
+}
+.video-item .vlabel{
+margin-top:10px;
+}
+.agent-grid{
+display:grid;
+grid-template-columns:repeat(4,minmax(0,1fr));
+gap:14px;
+margin-top:clamp(18px,2vh,26px);
+}
+.cron-section{
+margin-top:clamp(20px,2.4vh,30px);
+padding:clamp(18px,2vh,24px);
+border:0.5px solid var(--surface-border);
+border-radius:6px;
+background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.008));
+}
+.cron-title{
+font-size:11px;
+letter-spacing:0.24em;
+color:var(--accent);
+margin-bottom:14px;
+text-transform:uppercase;
+}
+.cron-row{
+display:flex;
+align-items:baseline;
+gap:16px;
+padding:8px 0;
+border-bottom:0.5px solid rgba(255,255,255,0.04);
+}
+.cron-row:last-child{border-bottom:none;}
+.cron-label{
+font-size:12px;
+letter-spacing:0.18em;
+color:var(--ink);
+text-transform:uppercase;
+min-width:120px;
+}
+.cron-time{
+font-family:'Space Mono',monospace;
+font-size:12px;
+color:var(--accent);
+min-width:140px;
+}
+.cron-desc{
+font-size:13px;
+color:var(--muted);
+}
+.view-system{
+margin-top:clamp(18px,2vh,26px);
+padding:clamp(18px,2vh,24px);
+border:0.5px solid var(--surface-border);
+border-radius:6px;
+background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.008));
+}
+.view-title{
+font-size:11px;
+letter-spacing:0.24em;
+color:var(--accent);
+margin-bottom:12px;
+text-transform:uppercase;
+}
+.view-row{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:12px;
+}
+.view-badge{
+font-size:12px;
+letter-spacing:0.15em;
+padding:6px 14px;
+border:0.5px solid var(--surface-border);
+border-radius:4px;
+color:var(--ink);
+text-transform:uppercase;
+background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+}
+.view-desc{
+font-size:13px;
+color:var(--muted);
+line-height:1.5;
+}
+.live-url{
+margin-top:clamp(14px,1.6vh,20px);
+font-size:12px;
+letter-spacing:0.18em;
+color:var(--accent);
+}
+
+.nav{
+padding:clamp(16px,2vh,22px) 2px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#0a0a0a;
+border-top:0.5px solid var(--hairline);
+flex-shrink:0;
+}
+.nbtn{
+background:none;
+border:0.5px solid var(--surface-border);
+color:var(--muted);
+padding:11px 24px;
+font-size:12px;
+letter-spacing:0.2em;
+cursor:pointer;
+transition:all 0.2s;
+}
+.nbtn:hover{
+border-color:var(--accent);
+color:var(--accent);
+}
+.dots{display:flex;gap:8px;align-items:center;}
+.dot{
+width:4px;
+height:4px;
+border-radius:50%;
+background:rgba(241,236,227,0.24);
+cursor:pointer;
+transition:all 0.3s;
+}
+.dot.on{
+background:var(--accent);
+width:22px;
+border-radius:999px;
+}
+.nav-right{display:flex;align-items:center;gap:18px;}
+.progress{
+font-size:12px;
+letter-spacing:0.2em;
+color:var(--muted);
+}
+
+@media (max-width: 1100px){
+.s1-name{line-height:0.96;}
+.h2{line-height:1.02;}
+}
+
+@media (max-width: 980px){
+.two-col,
+.card-grid-3,
+.card-grid-4,
+.stat-grid,
+.vgrid{grid-template-columns:repeat(2,minmax(0,1fr));}
+.video-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+.agent-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+.s1-tagline{max-width:520px;}
+.quote-text{line-height:1.42;}
+}
+
+@media (max-width: 720px){
+.slide-inner{padding:42px 28px 38px;}
+.two-col,
+.card-grid-2,
+.card-grid-3,
+.card-grid-4,
+.stat-grid,
+.vgrid{grid-template-columns:1fr;}
+.video-grid{grid-template-columns:1fr;}
+.agent-grid{grid-template-columns:1fr;}
+.nav{padding:14px 20px;}
+.contact-list li{grid-template-columns:1fr;gap:8px;}
+.s1-name{font-size:clamp(48px,13vw,80px);line-height:0.96;letter-spacing:-0.015em;}
+.s1-tagline{font-size:clamp(20px,5vw,28px);padding-left:18px;max-width:100%;}
+.h2{font-size:clamp(40px,10vw,64px);line-height:1.04;}
+.stat-n{font-size:clamp(36px,10vw,56px);}
+.quote-text{font-size:clamp(24px,5.5vw,32px);line-height:1.42;}
+.body-text,
+.list li,
+.contact-list li,
+.card-name,
+.card-body{font-size:max(16px, 1rem);}
+.vbox{aspect-ratio:16/10;}
+.badge-row, .brand-row{gap:8px;}
+.slide-index, .slide-cat{font-size:11px;}
+}
+
+@media (max-width: 480px){
+.s1-name{font-size:clamp(40px,12vw,64px);}
+.h2{font-size:clamp(34px,9vw,52px);}
+.slide-inner{padding:38px 22px 34px;}
+.nav{padding:12px 16px;}
+.nbtn{padding:9px 16px;font-size:11px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+.slides-wrap,
+.dot,
+.nbtn,
+.slide-inner,
+.card,
+.stat-card,
+.vbox{transition:none;}
+}
+
+@media print{
+@page{margin:0;size:auto;}
+html,body{overflow:visible;height:auto;background:#fff !important;color:#111;}
+.deck{height:auto;display:block;background:#fff;}
+.slides-wrap{display:block;transition:none !important;transform:none !important;}
+.slide{
+min-width:auto;height:auto;page-break-after:always;
+background:#fff !important;display:block;
+padding:48px 56px;
+}
+.slide::before, .bg-grain, .bg-line{display:none;}
+.slide-inner{
+padding:0;max-width:none;display:block;position:static;
+opacity:1 !important;transform:none !important;
+}
+.nav{display:none;}
+.slide-index, .slide-cat{color:#666;position:static;margin-bottom:12px;}
+.s1-name, .h2, .stat-n, .quote-text{color:#111;text-shadow:none;}
+.body-text, .list li, .card-body, .contact-list li{color:#333;}
+.card, .stat-card, .badge, .brand{
+background:#f5f5f5 !important;border:1px solid #ddd !important;
+box-shadow:none !important;backdrop-filter:none !important;
+}
+.card-cat, .badge, .slide-cat{color:#8a6d3b;}
+.brand{color:#555;}
+.rule{background:#c5a065;box-shadow:none;}
+.quote-block{border-left-color:#c5a065;}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+<div class="slides-wrap" id="sw">
+
+<!-- 01 INTRO -->
+<div class="slide slide-hero"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">01 / 13</div><div class="slide-cat">INTRODUCTION</div>
+<p class="s1-eyebrow">PORTFOLIO DECK · DRS FILMS · 2026</p>
+<p class="s1-name-text">ERIC ZHENG</p>
+<h1 class="s1-name">Film<br><em>Producer.</em><br>AI Builder.</h1>
+<p class="s1-title">FOUNDER, DRS FILMS &nbsp;·&nbsp; GREATER NEW YORK AREA &nbsp;·&nbsp; U.S. PERMANENT RESIDENT</p>
+<p class="s1-tagline">I produce films. I build AI systems. I connect both.</p>
+<div class="s1-meta">
+<div class="s1-meta-item">FILM<span>Sundance · Berlinale</span></div>
+<div class="s1-meta-item">COMMERCIAL<span>$8M+ Portfolio</span></div>
+<div class="s1-meta-item">AI SYSTEMS<span>OpenClaw · HyperFrames</span></div>
+<div class="s1-meta-item">EMBA<span>Quantic</span></div>
+</div>
+</div></div>
+
+<!-- 02 OVERVIEW -->
+<div class="slide slide-editorial"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">02 / 13</div><div class="slide-cat">OVERVIEW</div>
+<h2 class="h2">15 years.<br><em>Two worlds.</em></h2>
+<div class="rule"></div>
+<div class="two-col">
+<div><p class="col-head">TRADITIONAL</p>
+<ul class="list">
+<li><strong>Brief History of A Family</strong> — Sundance Grand Jury Nominee</li>
+<li>Berlinale Panorama · 60+ territories · Metascore 80 · RT 92%</li>
+<li>$8M+ commercial portfolio at Final Frontier</li>
+<li>Nike · Tencent · Riot Games · Beats · miHoYo · BMW</li>
+<li>EMBA — Quantic School of Business</li>
+</ul></div>
+<div><p class="col-head">AI-NATIVE</p>
+<ul class="list">
+<li>5 AI videos · 4 styles · under 4 weeks</li>
+<li>OpenClaw — multi-agent creative OS</li>
+<li>HyperFrames — AI video production pipeline</li>
+<li>Prompt Builder — shipped MVP</li>
+<li>AI Film Studio — G0–G7 production pipeline</li>
+</ul></div>
+</div>
+</div></div>
+
+<!-- 03 AI VIDEOS -->
+<div class="slide slide-ai"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">03 / 13</div><div class="slide-cat">AI WORK</div>
+<h2 class="h2">AI-native<br><em>videos</em></h2>
+<div class="rule"></div>
+<div class="video-grid">
+<div class="video-item"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/b4I2AGmFgWk" loading="lazy" allowfullscreen></iframe></div><p class="vlabel">PORTFOLIO REEL</p></div>
+<div class="video-item"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/f5BNhoHL2Uk" loading="lazy" allowfullscreen></iframe></div><p class="vlabel">HOME XSMARTHOME · LIVE-ACTION</p></div>
+<div class="video-item"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/7AGx2OsC6Yw" loading="lazy" allowfullscreen></iframe></div><p class="vlabel">HOME XSMARTHOME · MANGA</p></div>
+<div class="video-item"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/QpTX-hcNw4A" loading="lazy" allowfullscreen></iframe></div><p class="vlabel">AI FILM STUDIO · WORKFLOW</p></div>
+<div class="video-item"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/3aw-AqPE5M4" loading="lazy" allowfullscreen></iframe></div><p class="vlabel">PROMPT BUILDER · DEMO</p></div>
+</div>
+<p class="caption">5 VIDEOS · 4 STYLES · UNDER 4 WEEKS · ai.drsfilms.com</p>
+</div></div>
+
+<!-- 04 OPENCLAW -->
+<div class="slide slide-ai"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">04 / 13</div><div class="slide-cat">AI SYSTEM</div>
+<h2 class="h2">OpenClaw<br><em>multi-agent OS</em></h2>
+<div class="rule"></div>
+<p class="body-text"><span>Multi-agent AI operating system</span> orchestrating specialized agents across research, content development, knowledge curation, and deployment — coordinated through Discord, Obsidian, and Claude Code with rule-bound delegation and persistent project memory.</p>
+<div class="agent-grid">
+<div class="card"><p class="card-cat">COORDINATION</p><p class="card-name">General</p><p class="card-body">Orchestrator — routes tasks, manages priority, enforces loop detection</p></div>
+<div class="card"><p class="card-cat">EXECUTION</p><p class="card-name">Engineer</p><p class="card-body">Claude Code — autonomous coding, deployment, system building</p></div>
+<div class="card"><p class="card-cat">CONTENT</p><p class="card-name">Creator</p><p class="card-body">Copy, scripts, social posts, and narrative development</p></div>
+<div class="card"><p class="card-cat">STRATEGY</p><p class="card-name">Advisor</p><p class="card-body">Brand positioning, career strategy, and decision counsel</p></div>
+<div class="card"><p class="card-cat">KNOWLEDGE</p><p class="card-name">Wiseman</p><p class="card-body">Research synthesis, knowledge curation, Obsidian maintenance</p></div>
+<div class="card"><p class="card-cat">QUALITY</p><p class="card-name">Debugger</p><p class="card-body">Code review, bug triage, production issue resolution</p></div>
+<div class="card"><p class="card-cat">MEDIA</p><p class="card-name">Video-Creator</p><p class="card-body">HyperFrames pipeline — script to rendered MP4 with narration</p></div>
+<div class="card"><p class="card-cat">GROWTH</p><p class="card-name">Marketer</p><p class="card-body">LinkedIn, X, content scheduling, audience engagement</p></div>
+</div>
+<div class="cron-section">
+<p class="cron-title">AUTOMATED SCHEDULE</p>
+<div class="cron-row"><span class="cron-label">DAILY BRIEF</span><span class="cron-time">08:30</span><span class="cron-desc">Priority queue, email digest, task status</span></div>
+<div class="cron-row"><span class="cron-label">INBOX TRIAGE</span><span class="cron-time">09:00 · 14:00 · 21:00</span><span class="cron-desc">Email classification, response drafts, escalation</span></div>
+<div class="cron-row"><span class="cron-label">WEEKLY RETRO</span><span class="cron-time">FRI 18:00</span><span class="cron-desc">Sprint review, metric summary, next-week plan</span></div>
+</div>
+</div></div>
+
+<!-- 05 PROMPT BUILDER -->
+<div class="slide slide-ai"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">05 / 13</div><div class="slide-cat">SHIPPED MVP</div>
+<h2 class="h2">Prompt Builder<br><em>by HyperFrames</em></h2>
+<div class="rule"></div>
+<p class="body-text"><span>Built with Claude Code</span> — a structured prompt workflow tool that eliminates fragmented AI image generation. Groups prompt inputs, runs GPT Image 2 with structured JSON output, enhances via LLM, exports with history tracking.</p>
+<div class="card-grid-3">
+<div class="card"><p class="card-cat">BUILT WITH</p><p class="card-name">Claude Code</p><p class="card-body">End-to-end by coding agent — lint passed, 0 layout issues</p></div>
+<div class="card"><p class="card-cat">FORMAT</p><p class="card-name">16:9 Product Demo</p><p class="card-body">17-second English explainer, AAC audio, production-ready MP4</p></div>
+<div class="card"><p class="card-cat">STATUS</p><p class="card-name">Shipped ✓</p><p class="card-body">Validated and rendered — part of HyperFrames pipeline</p></div>
+</div>
+<p class="live-url">LIVE → ericzheng-lab.github.io/prompt-builder</p>
+</div></div>
+
+<!-- 06 AI FILM STUDIO -->
+<div class="slide slide-ai"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">06 / 13</div><div class="slide-cat">AI FILM STUDIO</div>
+<h2 class="h2">G0–G7<br><em>production pipeline</em></h2>
+<div class="rule"></div>
+<p class="body-text"><span>Next.js 16 application</span> with gate-controlled production flow — from script to final delivery. Each gate unlocks the next stage, enforcing production discipline. Supabase-backed with 5-View System and runtime gate validation.</p>
+<div class="card-grid-4">
+<div class="card"><p class="card-cat">G0–G2</p><p class="card-name">Script → Breakdown</p><p class="card-body">LLM scene analysis, shot list generation</p></div>
+<div class="card"><p class="card-cat">G3–G4</p><p class="card-name">Image Generation</p><p class="card-body">Reference packs via Prompt Builder + image APIs</p></div>
+<div class="card"><p class="card-cat">G5–G6</p><p class="card-name">Video Generation</p><p class="card-body">Shot-by-shot AI video with review gate</p></div>
+<div class="card"><p class="card-cat">G7</p><p class="card-name">Delivery</p><p class="card-body">Final assembly, QC, and export</p></div>
+</div>
+<div class="view-system">
+<p class="view-title">5-VIEW SYSTEM</p>
+<div class="view-row">
+<span class="view-badge">Dashboard</span><span class="view-badge">Canvas</span><span class="view-badge">Documents</span><span class="view-badge">Library</span><span class="view-badge">Review</span>
+</div>
+<p class="view-desc">Gate validation: no generation without prior gate approval. Exploration ≠ master — only approved outputs advance.</p>
+</div>
+</div></div>
+
+<!-- 07 BUDGET STUDIO -->
+<div class="slide slide-ai"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">07 / 13</div><div class="slide-cat">BUDGET STUDIO</div>
+<h2 class="h2">AI-native<br><em>production budgeting</em></h2>
+<div class="rule"></div>
+<p class="body-text"><span>React 18 + Vite + Supabase</span> — a purpose-built film budgeting tool with contingency/fringe auto-calculation, cash flow integration, budget versioning, Excel/PDF export, dark/light theme, and Supabase auth with auto-save.</p>
+<div class="card-grid-3">
+<div class="card"><p class="card-cat">CORE</p><p class="card-name">Contingency &amp; Fringe</p><p class="card-body">Auto-calc: Base + Fringe → Subtotal → + Contingency → Grand Total</p></div>
+<div class="card"><p class="card-cat">FLOW</p><p class="card-name">Cash Flow Integration</p><p class="card-body">Link sections to budget lines, auto-populate from globals</p></div>
+<div class="card"><p class="card-cat">VERSIONING</p><p class="card-name">Budget Snapshots</p><p class="card-body">Save, load, compare, rename, and delete budget versions</p></div>
+<div class="card"><p class="card-cat">EXPORT</p><p class="card-name">Excel &amp; PDF</p><p class="card-body">Full export with fringe/contingency rows and print-to-browser PDF</p></div>
+<div class="card"><p class="card-cat">THEME</p><p class="card-name">Dark / Light</p><p class="card-body">Dual-theme with reduced motion support and focus ring</p></div>
+<div class="card"><p class="card-cat">AUTH</p><p class="card-name">Supabase Auth</p><p class="card-body">Anonymous login, auto-save to PostgreSQL + JSONB</p></div>
+</div>
+<div class="badge-row" style="margin-top:clamp(12px,1.5vh,18px);">
+<span class="badge">REACT 18</span><span class="badge">VITE 6</span><span class="badge">TAILWIND 4</span><span class="badge">SUPABASE</span>
+</div>
+</div></div>
+
+<!-- 08 PRODUCT MATRIX -->
+<div class="slide slide-ai"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">08 / 13</div><div class="slide-cat">PRODUCTS</div>
+<h2 class="h2">7 products,<br><em>one studio</em></h2>
+<div class="rule"></div>
+<div class="card-grid-4">
+<div class="card"><p class="card-cat">AI ORCHESTRATION</p><p class="card-name">OpenClaw</p><p class="card-body">Multi-agent creative OS · 8 agents · Discord + Obsidian</p></div>
+<div class="card"><p class="card-cat">FILM PIPELINE</p><p class="card-name">AI Film Studio</p><p class="card-body">G0–G7 gated production · 5-View · Next.js 16 + Supabase</p></div>
+<div class="card"><p class="card-cat">PROMPT TOOL</p><p class="card-name">Prompt Builder</p><p class="card-body">Shot Language → Model Prompt · PWA · GPT Image 2 JSON</p></div>
+<div class="card"><p class="card-cat">BUDGETING</p><p class="card-name">Budget Studio</p><p class="card-body">AI-native budgeting · Contingency/Fringe · Excel/PDF</p></div>
+<div class="card"><p class="card-cat">GENERATIVE</p><p class="card-name">AI Canvas Studio</p><p class="card-body">Generative canvas tool · Multi-model · video-canvas.pages.dev</p></div>
+<div class="card"><p class="card-cat">VIDEO AGENT</p><p class="card-name">VideoAgent Studio</p><p class="card-body">AI video generation workspace · 5 adapters · Vercel</p></div>
+<div class="card"><p class="card-cat">OPEN SOURCE</p><p class="card-name">OpenVideoAgent</p><p class="card-body">Open source video agent framework · Browser-direct API</p></div>
+</div>
+</div></div>
+
+<!-- 09 TOOL STACK -->
+<div class="slide slide-ai"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">09 / 13</div><div class="slide-cat">TOOL STACK</div>
+<h2 class="h2">How I<br><em>build</em></h2>
+<div class="rule"></div>
+<div class="card-grid-3">
+<div class="card"><p class="card-cat">AI ORCHESTRATION</p><p class="card-name">Claude Code · OpenClaw · ChatGPT</p><p class="card-body">Daily driver (4-8h) · multi-agent OS · general reasoning</p></div>
+<div class="card"><p class="card-cat">VIDEO</p><p class="card-name">Runway · Seedance · Higgsfield · HyperFrames</p><p class="card-body">Live-action, anime, stop-motion, rendered MP4 pipeline</p></div>
+<div class="card"><p class="card-cat">IMAGE</p><p class="card-name">GPT-Image-2 · Flux 2 Max · Midjourney · Nano Banana</p><p class="card-body">Concept art, style frames, structured JSON prompts</p></div>
+<div class="card"><p class="card-cat">AUDIO</p><p class="card-name">ElevenLabs · Suno · MiMo TTS</p><p class="card-body">Voice synthesis, music generation, custom voice clone</p></div>
+<div class="card"><p class="card-cat">FRAMEWORKS</p><p class="card-name">Next.js 16 · React 18 · Vite · Tailwind</p><p class="card-body">Application layer for AI Film Studio, Budget Studio, Canvas</p></div>
+<div class="card"><p class="card-cat">DATA</p><p class="card-name">Supabase · Zustand · ReactFlow</p><p class="card-body">PostgreSQL persistence, state management, canvas node graph</p></div>
+</div>
+</div></div>
+
+<!-- 10 FILM -->
+<div class="slide slide-film"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">10 / 13</div><div class="slide-cat">FILM</div>
+<h2 class="h2">Brief History<br><em>of A Family</em></h2>
+<div class="rule"></div>
+<div class="badge-row">
+<span class="badge">SUNDANCE GRAND JURY NOMINEE</span>
+<span class="badge">BERLINALE PANORAMA</span>
+<span class="badge">60+ TERRITORIES</span>
+<span class="badge">METASCORE 80</span>
+<span class="badge">RT 92%</span>
+</div>
+<div class="stat-grid">
+<div class="stat-card"><div class="stat-n">$2.5M</div><div class="stat-l">BUDGET · CN / FR / DK</div></div>
+<div class="stat-card"><div class="stat-n">60+</div><div class="stat-l">INTERNATIONAL TERRITORIES</div></div>
+<div class="stat-card"><div class="stat-n">30+</div><div class="stat-l">FESTIVAL SCREENINGS</div></div>
+</div>
+<p class="body-text mt-xs">Produced the debut feature by director <span>Jianjie Lin</span> — financing from Paris Region Film Fund, Torino Film Lab, and Doha Film Institute.</p>
+</div></div>
+
+<!-- 11 COMMERCIAL -->
+<div class="slide slide-film"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">11 / 13</div><div class="slide-cat">COMMERCIAL</div>
+<h2 class="h2">$8M+ global<br><em>campaigns</em></h2>
+<div class="rule"></div>
+<div class="brand-row">
+<span class="brand">NIKE</span><span class="brand">TENCENT</span><span class="brand">RIOT GAMES</span><span class="brand">BEATS</span><span class="brand">MIHОYO</span><span class="brand">L'OREAL</span><span class="brand">BMW</span><span class="brand">COACH</span><span class="brand">VIVO</span><span class="brand">NETEASE</span>
+</div>
+<div class="stat-grid">
+<div class="stat-card"><div class="stat-n">$8M+</div><div class="stat-l">PORTFOLIO · 18 MONTHS</div></div>
+<div class="stat-card"><div class="stat-n">10+</div><div class="stat-l">CAMPAIGNS PER YEAR</div></div>
+<div class="stat-card"><div class="stat-n">3</div><div class="stat-l">CONTINENTS · US / EU / APAC</div></div>
+</div>
+</div></div>
+
+<!-- 12 PHILOSOPHY -->
+<div class="slide slide-closing"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">12 / 13</div><div class="slide-cat">PHILOSOPHY</div>
+<h2 class="h2">Why both<br><em>worlds matter</em></h2>
+<div class="rule"></div>
+<div class="quote-block">
+<p class="quote-text">Production has always been about orchestration. <em>AI just adds new types of agents to the mix.</em></p>
+</div>
+<p class="body-text mt-s">15 years of production craft brings what AI tooling alone cannot: <span>production logic, project evaluation frameworks, and quality judgment.</span> The future won't divide between AI users and non-users — it will divide between those who use single tools and those who design AI-native systems.</p>
+</div></div>
+
+<!-- 13 CONTACT -->
+<div class="slide slide-closing"><div class="bg-grain"></div><div class="bg-line"></div>
+<div class="slide-inner">
+<div class="slide-index">13 / 13</div><div class="slide-cat">CONTACT</div>
+<h2 class="h2">Let's<br><em>talk.</em></h2>
+<div class="rule"></div>
+<ul class="contact-list">
+<li><span>EMAIL</span><span>eric.zheng@drsfilms.com</span></li>
+<li><span>TRADITIONAL</span><span>drsfilms.com</span></li>
+<li><span>AI WORK</span><span>ai.drsfilms.com</span></li>
+<li><span>LINKEDIN</span><span>linkedin.com/in/ericzhengyue</span></li>
+<li><span>LIVE PRODUCTS</span><span>ai.drsfilms.com · video-canvas.pages.dev · videoagent-studio.vercel.app · prompt-builder</span></li>
+<li><span>LOCATION</span><span>Greater New York Area · U.S. Permanent Resident · Available immediately</span></li>
+</ul>
+<p class="availability">OPEN TO: SENIOR PRODUCER · EXECUTIVE PRODUCER · AI-NATIVE CREATIVE LEADERSHIP</p>
+</div></div>
+
+</div>
+<div class="nav">
+<button class="nbtn" onclick="go(-1)">← PREV</button>
+<div class="dots" id="dots"></div>
+<div class="nav-right">
+<span class="progress" id="prog">01 / 13</span>
+<button class="nbtn" onclick="go(1)">NEXT →</button>
+</div>
+</div>
+</div>
+<script>
+let c=0,t=13;
+const sw=document.getElementById('sw');
+const dotsEl=document.getElementById('dots');
+const prog=document.getElementById('prog');
+const slides=document.querySelectorAll('.slide');
+for(let i=0;i<t;i++){const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.onclick=()=>goTo(i);dotsEl.appendChild(d);}
+function goTo(n){
+c=Math.max(0,Math.min(t-1,n));
+sw.style.transform=`translateX(-${c*100}%)`;
+slides.forEach((s,i)=>s.classList.toggle('active',i===c));
+document.querySelectorAll('.dot').forEach((d,i)=>d.className='dot'+(i===c?' on':''));
+prog.textContent=(c+1<10?'0'+(c+1):c+1)+' / '+t;
+}
+function go(d){goTo(c+d);}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);});
+slides[0].classList.add('active');
+</script>
+</body>
+</html>
