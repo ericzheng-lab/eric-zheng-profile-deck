@@ -1,0 +1,454 @@
+Eric Zheng Profile Deck v7 升级方案
+设计原则
+
+HR 版本：6 张，每张一个"钉子"
+文字最小化：每张 ≤30 字（标题+短句）
+视觉为主：数据/图片/截图/Logo/视频
+保留现有暗色 cinematic 设计系统
+
+
+Slide 01 — Hero
+目的：身份钉子，零文字段落
+布局：
+
+全屏背景：电影质感的视觉
+居中两行字
+
+大字（Space Grotesk，clamp 80-160px）：ERIC ZHENG
+小字（Barlow Condensed，clamp 18-28px，gold accent）：Film Producer · AI Builder · 15 Years
+
+
+右下角小字：Greater NY · Available
+
+背景图 AI 生成提示词（推荐 Midjourney 或 Higgsfield）：
+Cinematic wide shot, dark warm-toned film set with vintage 
+35mm camera silhouette on left and glowing computer monitors 
+on right, golden hour light flares, smoke haze, anamorphic lens 
+flare, shallow depth of field, Roger Deakins lighting style, 
+shot on Arri Alexa, cinematic 2.39:1 aspect ratio, moody 
+charcoal and amber palette, no people, --ar 16:9 --style raw
+关键词解释： 左边胶片机=传统电影，右边屏幕=AI，画面对半构图，呼应"两个世界"叙事。
+
+Slide 02 — Traditional Credibility
+目的：3个数字 + 品牌 logo 矩阵，建立硬通货资历
+布局：
+┌─────────────────────────────────────────────┐
+│                                              │
+│    $8M+           Sundance          60+     │
+│    Campaigns      Grand Jury        Countries│
+│                   Nominee           Released │
+│                                              │
+│  ─────────────────────────────────────────  │
+│                                              │
+│  [Nike] [Tencent] [Riot] [L'Oréal] [BMW]    │
+│  [miHoYo] [+ 4 more]                        │
+│                                              │
+└─────────────────────────────────────────────┘
+实现要点：
+
+3个数字用大号字（clamp 60-120px），gold accent
+数字下面小字描述（clamp 14-18px，warm gray）
+品牌 logo 全部用单色（warm white 或 #c5a065），统一高度 40px
+Logo 之间用细分隔线，营造画廊感
+不要写任何句子描述
+
+Logo 准备：
+
+从各品牌官网下载官方 SVG logo
+转单色处理（CSS filter: brightness(0) invert(1) opacity(0.7)）
+或者放在 assets/logos/ 目录
+
+
+Slide 03 — Dual Identity（核心叙事钉）
+目的：用2个视频证明 "I make + I build"
+布局：
+┌──────────────────┬──────────────────┐
+│                  │                  │
+│  [VIDEO 1]       │  [VIDEO 2]       │
+│  HOME MANGA      │  AI Film Studio  │
+│  缩略图          │   workflow demo  │
+│  ▶ 播放键        │  ▶ 播放键        │
+│                  │                  │
+├──────────────────┼──────────────────┤
+│                  │                  │
+│  I make AI films │  I build the     │
+│                  │  tools           │
+│                  │                  │
+└──────────────────┴──────────────────┘
+实现要点：
+
+左右各占 50% 宽度
+视频缩略图保留原 YouTube embed，但隐藏 YouTube UI（参数 ?controls=0&modestbranding=1&rel=0）
+缩略图上叠加一个大的播放图标（SVG）
+视频下方一行字（clamp 24-40px，Space Grotesk）
+鼠标 hover 时缩略图微放大（scale 1.02）
+
+为什么是这两个视频：
+
+HOME MANGA = 你做的 AI 作品本身
+AI Film Studio workflow = 你做的工具
+一左一右，就是你的双重身份
+
+
+Slide 04 — What I Built
+目的：3个产品截图，证明 build 能力
+布局：
+┌─────────────┬─────────────┬─────────────┐
+│             │             │             │
+│  [截图]     │  [截图]     │  [截图]     │
+│  AI Film    │  Budget     │  Prompt     │
+│  Studio     │  Studio     │  Builder    │
+│             │             │             │
+│  Script to  │  Built for  │  Film-grade │
+│  Screen     │  Producers  │  Prompts    │
+│             │             │             │
+│  [Live →]   │  [Live →]   │  [Live →]   │
+│             │             │             │
+└─────────────┴─────────────┴─────────────┘
+实现要点：
+
+3列等分
+每个截图比例 16:10，圆角 8px，轻微 box-shadow + 1px 边框
+标题大字（Space Grotesk 32-48px）
+副标题斜体（Barlow Condensed 18-24px，warm gray）
+"Live →" 链接 gold accent，hover 时有箭头位移动画
+
+截图要求（让 Engineer 截）：
+
+AI Film Studio：Canvas 视图，G0-G7 pipeline 全展开，最好有几个 shot 节点已经生成图像，不要空白状态
+Budget Studio：Top Sheet 投资人摘要页，带数字和图表，看起来"专业"
+Prompt Builder：主界面 + 一个完整 prompt 输出示例
+
+每张截图：
+
+1920x1200 分辨率
+去掉浏览器 chrome（用 macOS Cmd+Shift+4 + Space 截窗口，或者用 CleanShot）
+暗色模式（如果产品支持）
+不要带个人信息
+
+
+Slide 05 — Tool Stack & Workflow
+目的：行业认知 + 视觉化技术栈
+布局：
+┌─────────────────────────────────────────────┐
+│                                              │
+│           AI ORCHESTRATION                   │
+│  [Claude] [Cursor] [OpenSpec] [Discord]      │
+│                                              │
+│           VIDEO & IMAGE                      │
+│  [Runway] [Higgsfield] [Seedance] [MJ]       │
+│  [Flux] [Nano Banana] [Kling]                │
+│                                              │
+│           AUDIO                              │
+│  [ElevenLabs] [Suno]                         │
+│                                              │
+│           BUILD STACK                        │
+│  [Next.js] [React] [Supabase] [Vercel]      │
+│  [Cloudflare] [GitHub]                      │
+│                                              │
+└─────────────────────────────────────────────┘
+实现要点：
+
+4个分类，每个分类小标题（Space Mono 12px，uppercase，letter-spacing 0.2em，warm gray）
+Logo 用官方单色 SVG，统一高度 32px
+Logo 之间留充足间距（gap 24px）
+全部 warm white 单色处理，hover 时变 gold
+
+Logo 来源：
+
+优先用 simpleicons.org（开源 SVG 库）
+没有的就从官方品牌 kit 下载
+全部转单色：filter: brightness(0) invert(0.85)
+
+可选增强： 在 logo 旁边加一个小的使用案例数字，比如 "Runway · 80+ generations"。但要看你实际数据，没有就不加，别编。
+
+Slide 06 — Contact
+目的：联系方式 + 行动召唤
+布局：
+┌─────────────────────────────────────────────┐
+│                                              │
+│           Let's build something.             │
+│                                              │
+│  ┌────────┐         ┌────────┐              │
+│  │ [QR]   │         │ [QR]   │              │
+│  │        │         │        │              │
+│  └────────┘         └────────┘              │
+│  drsfilms.com       ai.drsfilms.com         │
+│  (Traditional)      (AI Native)             │
+│                                              │
+│  ─────────────────────────────────────────  │
+│                                              │
+│  eric@drsfilms.com                          │
+│  linkedin.com/in/ericzheng                  │
+│                                              │
+│  Greater New York · U.S. Permanent Resident │
+│  Available Immediately                       │
+│                                              │
+└─────────────────────────────────────────────┘
+实现要点：
+
+顶部一句钩子（Space Grotesk 48-72px）
+两个 QR 码并排（生成工具：qr-code-generator.com，颜色配 gold #c5a065 on 透明背景）
+QR 下方网站名 + 一行说明
+邮箱和 LinkedIn 是真链接（mailto: 和 href）
+底部三行小字，warm gray
+
+
+改造步骤建议（给 Engineer 的执行单）
+
+新建 v7： 复制 eric-zheng-deck-v6.html 为 eric-zheng-deck-v7.html
+删除： 旧 slide 04 (OpenClaw)、05 (Prompt Builder 单页)、06 (AI Film Studio 单页)、07 (Budget Studio 单页)、08 (Product Matrix)、10 (Film 单页)、11 (Commercial 单页)、12 (Philosophy)
+保留并重写： 6 张新 slide
+资产准备：
+
+Hero 背景图（AI 生成，用上面提示词）
+3 个产品截图（你截）
+Logo SVG 单色处理
+2 个 QR 码生成
+
+
+保留： 现有 CSS 设计系统、字体、暗色主题、键盘导航、响应式
+验证： 移动端 6 张能否完整展示
+
+
+关于"AI 公司版"
+不在这次升级范围内。这一版先做完 HR 版，跑通 + 收到反馈后，再做技术版（保留 OpenClaw、AI Film Studio 深度、产品矩阵那些内容）。
+不要一次做两版——先把一版做完美。
+
+需要我帮你把 Hero 背景图提示词再调几个备选版本吗？或者直接把这份方案整理成给 Engineer 的 OpenSpec proposal 格式？You said: 只有 6 页😂？只有 6 页😂？10:00 PMClaude responded: 哈哈，理解你的反应，但我要直接说——这个反应本身就是问题。哈哈，理解你的反应，但我要直接说——这个反应本身就是问题。
+
+"只有6页"是创作者视角，不是受众视角。
+你看的是"我做了这么多东西，6页装不下"。
+HR 看的是"我有30秒，给我看完"。
+
+真实数据：
+
+简历平均阅读时间：7.4秒（Ladders 眼动追踪研究）
+Deck 投递场景，HR 翻完整份的概率：< 15%
+一份6张的 deck，HR 大概率会全看完
+一份13张的 deck，HR 大概率看到第4张就关
+
+13张全看完 vs 6张全看完，钉住的印象哪个更深？
+
+但你的感受也合理，所以折中方案：
+把 deck 分成两层：
+核心 6 张（HR 必看）— 上面的方案不变
+深度补充层（可选 +4 张），放在第6张联系页之前，给愿意往下看的人：
+#内容07OpenClaw 系统架构（8 agent + cron）— 一张架构图，少字08AI Film Studio 深度（G0-G7 pipeline 图）— 一张流程图09Brief History of A Family（Sundance/Berlinale 详情）— 海报 + 3个数据10Philosophy（Why both worlds matter）— 一段话，大字排版
+总共 10 张，但前6张完整，后4张是"深读"。
+这样既照顾 HR 30秒决策，也满足愿意深入了解的雇主。
+
+关键设计：第6张联系页要往后挪，但前6张要能独立成立。
+意思是：HR 如果只看前6张就关掉，叙事是完整的；如果继续看，是 bonus。
+
+10张你能接受吗？还是觉得还不够？如果不够，告诉我你想保留哪些内容，我们一起算账，不是数字游戏，是叙事密度。You said: 可以，给我其他 4 张的具体内容可以，给我其他 4 张的具体内容10:01 PMClaude responded: 好，4张深度补充层。继续遵循"每张一个钉子、视觉为主、文字最小化"的原则。好，4张深度补充层。继续遵循"每张一个钉子、视觉为主、文字最小化"的原则。
+
+Slide 07 — OpenClaw System Architecture
+目的：证明你 build 的不只是单一产品，是 system thinking
+布局：
+┌─────────────────────────────────────────────┐
+│                                              │
+│            OPENCLAW                          │
+│   Multi-Agent Creative OS                    │
+│                                              │
+│  ┌──────────────────────────────────────┐   │
+│  │                                       │   │
+│  │     [架构图 SVG，居中放置]            │   │
+│  │                                       │   │
+│  │  General → Engineer / Creator /       │   │
+│  │            Advisor / Wiseman ...      │   │
+│  │                                       │   │
+│  └──────────────────────────────────────┘   │
+│                                              │
+│  8 Agents · 24/7 Mac Air · Discord-controlled│
+│                                              │
+└─────────────────────────────────────────────┘
+实现要点：
+
+标题大字 + 一行副标题
+架构图直接复用现有的 OpenClaw-Agent-Control-v1.svg（你已经有了，记得吗？在"已完成资产"里）
+图下方一行 metadata，warm gray 小字
+不要写一堆解释段落
+
+架构图如果还需要重做（更适合 deck 比例）：
+AI 生成提示词（用 Excalidraw style 或 Mermaid 渲染后导出 SVG）：
+Clean technical architecture diagram, dark background (#0d0b09), 
+warm white nodes with thin gold borders, hub-and-spoke layout, 
+central "General" node connected to 7 satellite nodes labeled 
+"Engineer", "Creator", "Advisor", "Wiseman", "Marketer", 
+"Debugger", "Video-Creator", thin connecting lines, minimal 
+labels, monospace font (JetBrains Mono), no shadows, no 3D, 
+flat technical illustration, isometric or top-down view
+或者直接 Mermaid：
+#mermaid-r1n1{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r1n1 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r1n1 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r1n1 .error-icon{fill:#CC785C;}#mermaid-r1n1 .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r1n1 .edge-thickness-normal{stroke-width:1px;}#mermaid-r1n1 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r1n1 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r1n1 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r1n1 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r1n1 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r1n1 .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r1n1 .marker.cross{stroke:#A1A1A1;}#mermaid-r1n1 svg{font-family:inherit;font-size:16px;}#mermaid-r1n1 p{margin:0;}#mermaid-r1n1 .label{font-family:inherit;color:#E5E5E5;}#mermaid-r1n1 .cluster-label text{fill:#3387a3;}#mermaid-r1n1 .cluster-label span{color:#3387a3;}#mermaid-r1n1 .cluster-label span p{background-color:transparent;}#mermaid-r1n1 .label text,#mermaid-r1n1 span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r1n1 .node rect,#mermaid-r1n1 .node circle,#mermaid-r1n1 .node ellipse,#mermaid-r1n1 .node polygon,#mermaid-r1n1 .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r1n1 .rough-node .label text,#mermaid-r1n1 .node .label text,#mermaid-r1n1 .image-shape .label,#mermaid-r1n1 .icon-shape .label{text-anchor:middle;}#mermaid-r1n1 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r1n1 .rough-node .label,#mermaid-r1n1 .node .label,#mermaid-r1n1 .image-shape .label,#mermaid-r1n1 .icon-shape .label{text-align:center;}#mermaid-r1n1 .node.clickable{cursor:pointer;}#mermaid-r1n1 .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r1n1 .arrowheadPath{fill:#0b0b0b;}#mermaid-r1n1 .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r1n1 .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r1n1 .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r1n1 .edgeLabel p{background-color:transparent;}#mermaid-r1n1 .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r1n1 .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r1n1 .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r1n1 .cluster text{fill:#3387a3;}#mermaid-r1n1 .cluster span{color:#3387a3;}#mermaid-r1n1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r1n1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r1n1 rect.text{fill:none;stroke-width:0;}#mermaid-r1n1 .icon-shape,#mermaid-r1n1 .image-shape{background-color:transparent;text-align:center;}#mermaid-r1n1 .icon-shape p,#mermaid-r1n1 .image-shape p{background-color:transparent;padding:2px;}#mermaid-r1n1 .icon-shape rect,#mermaid-r1n1 .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r1n1 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r1n1 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r1n1 :root{--mermaid-font-family:inherit;}GeneralEngineerCreatorAdvisorWisemanMarketerDebuggerVideo-Creator
+然后用 Mermaid Live Editor 导出 SVG，CSS 调色。
+
+Slide 08 — AI Film Studio Deep Dive
+目的：证明你对 AI 电影制作流程的系统理解
+布局：
+┌─────────────────────────────────────────────┐
+│                                              │
+│        AI FILM STUDIO                        │
+│        Script → Screen, Gated.               │
+│                                              │
+│  ┌──────────────────────────────────────┐   │
+│  │                                       │   │
+│  │  G0 ─ G1 ─ G1.5 ─ G2 ─ G3 ─ G4 ─ G5 ─ G6 ─ G7  │
+│  │   │    │    │     │    │    │    │    │    │   │
+│  │  [图标][图标][图标]...                          │
+│  │                                       │   │
+│  │  Breakdown → Treatment → Look Bible →         │
+│  │  Reference → Shot Design → Generation →        │
+│  │  Review                                       │
+│  └──────────────────────────────────────┘   │
+│                                              │
+│  9 Gates · LLM-Validated · Built in Next.js  │
+│                                              │
+└─────────────────────────────────────────────┘
+实现要点：
+
+横向流程图，G0-G7（实际是9个 gate）一条线展开
+每个 gate 一个简化图标 + 一个英文短词
+全部用 gold accent 描边，节点之间细线连接
+底部一行 metadata
+
+流程图实现方式（推荐）：
+直接用 HTML/CSS 做，不用图片：
+html<div class="gate-pipeline">
+  <div class="gate"><span class="num">G0</span><span class="label">Breakdown</span></div>
+  <div class="line"></div>
+  <div class="gate"><span class="num">G1</span><span class="label">Treatment</span></div>
+  <div class="line"></div>
+  ...
+</div>
+好处：完全响应式，无图片资源，颜色随主题。
+如果一定要做 AI 图像，提示词：
+Horizontal pipeline flowchart, 9 connected nodes in a row, 
+each node is a small circle with number G0 to G7 inside, 
+gold (#c5a065) outline on dark charcoal background, thin 
+connecting lines between nodes, minimal labels below each 
+node in monospace font, technical blueprint aesthetic, 
+no 3D, flat vector style, --ar 21:9
+
+Slide 09 — Film Credentials
+目的：把 Sundance/Berlinale 这个最硬的资历给足空间
+布局：
+┌─────────────────────────────────────────────┐
+│                                              │
+│  ┌────────────┐                              │
+│  │            │   BRIEF HISTORY               │
+│  │            │   OF A FAMILY                 │
+│  │  [海报]    │                              │
+│  │            │   Sundance Grand Jury        │
+│  │            │   Prize Nominee              │
+│  │            │   Berlinale Panorama         │
+│  │            │                              │
+│  └────────────┘   $2.5M · 3-Country Co-Prod  │
+│                   60+ Countries Released     │
+│                   Director: Lin Jianjie      │
+│                                              │
+└─────────────────────────────────────────────┘
+实现要点：
+
+左侧电影海报（你应该有官方海报），高度占满 slide 的 70%
+右侧三行核心信息：
+
+电影名（大字 Space Grotesk）
+两个电影节奖项（中字 Barlow Condensed gold）
+四个数据点（小字，warm gray）
+
+
+海报要高清，至少 800x1200
+
+如果海报版权敏感不想用：
+替代方案——做一张抽象的电影质感图：
+AI 生成提示词：
+Cinematic film still, single frame from an arthouse drama, 
+intimate family scene in dim warm lighting, shallow depth 
+of field, anamorphic lens, soft grain, melancholic mood, 
+shot on Kodak film stock, Wong Kar-wai meets Ozu aesthetic, 
+no faces visible (back of head or hands only), 
+domestic interior, --ar 2:3 --style raw
+但还是建议用真实海报，更有说服力。
+
+Slide 10 — Philosophy
+目的：留下"这个人是谁"的余韵，结尾留白
+布局：
+┌─────────────────────────────────────────────┐
+│                                              │
+│                                              │
+│                                              │
+│     I produce films.                         │
+│     I build AI systems.                      │
+│     I connect both.                          │
+│                                              │
+│                                              │
+│           ─────                              │
+│                                              │
+│     15 years has taught me                   │
+│     that creative work is                    │
+│     90% logistics, 10% magic.                │
+│                                              │
+│     AI doesn't change the ratio.             │
+│     It changes who can deliver               │
+│     the 90%.                                 │
+│                                              │
+│                                              │
+└─────────────────────────────────────────────┘
+实现要点：
+
+大量留白，文字居中，约占 slide 中间 60% 宽度
+上半部分三行 manifesto，大字（Space Grotesk 48-64px）
+中间一条 gold 分隔线（只是装饰性短线，宽 40px）
+下半部分两段话，中字（Barlow Condensed 24-32px，warm gray）
+不要图片，不要图表，让文字本身成为视觉
+字之间行距放宽（line-height 1.6-1.8）
+
+为什么这张要这样写：
+前9张已经"展示"完了，第10张要"留下印象"。你的核心叙事是 "I produce films. I build AI systems. I connect both."——这是你 Project System Prompt 里写明的核心定位。直接用，不要改。
+下面那段是给雇主的钩子：他们听惯了"AI 改变一切"的空话，你说"AI 不改变比例，改变的是谁能交付那 90%"——这是一个 Producer 的视角，不是 AI 创业者的视角，正好把你的差异化讲清楚。
+
+资产清单（给 Engineer / 你）
+需要 AI 生成的：
+
+Slide 01 Hero 背景图（已给提示词）
+Slide 07 架构图（可选，如果不用现有 SVG）
+Slide 09 替代海报（可选）
+
+需要你提供的：
+
+Slide 04 三个产品截图（AI Film Studio / Budget Studio / Prompt Builder）
+Slide 09 电影官方海报
+各品牌官方 logo（Slide 02）
+
+直接代码实现的：
+
+Slide 08 G0-G7 流程图（HTML/CSS）
+所有 typography 和布局
+
+
+最终 10 张结构总览
+01 Hero — 我是谁
+02 Traditional — $8M+, Sundance, 60+ 国家
+03 Dual Identity — 2 个视频，I make / I build
+04 What I Built — 3 个产品截图
+05 Tool Stack — 工具栈 logo grid
+─── HR 看到这里基本够了 ───
+06 OpenClaw — 系统架构（深度1）
+07 AI Film Studio — G0-G7 pipeline（深度2）
+08 Film — Sundance/Berlinale 详情（深度3）
+09 Philosophy — 收尾留白
+10 Contact — 联系方式
+等等，我刚才数错顺序了——让我重新对一下你最终要的 10 张顺序：
+正确顺序应该是：
+01 Hero
+02 Traditional Credibility  
+03 Dual Identity (videos)
+04 What I Built (3 product screenshots)
+05 Tool Stack
+06 OpenClaw Architecture (深度补充)
+07 AI Film Studio Deep Dive (深度补充)
+08 Film Credentials (深度补充)
+09 Philosophy (深度补充)
+10 Contact
+Contact 放最后才对，深度4张插在 Tool Stack 和 Contact 之间。
